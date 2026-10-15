@@ -1,6 +1,10 @@
-# 小格的心愿指引
+# 小格的月光占卜小屋
 
-一个为 iPhone 优先设计的私人选择指引 PWA。犹豫内容和历史记录都只保存在当前设备的浏览器中；公开构建不包含精确出生资料。
+一个为 iPhone 优先设计的私人选择指引 PWA。四类场景追问、78 张 RWS 塔罗原作插图与正逆位、三枚钱币六掷与 64 卦/384 爻原文、手札与回响、减少动画及离线支持。犹豫内容和历史记录都只保存在当前设备的浏览器中。
+
+网站：https://baizhener61-creator.github.io/xiaoge-guidance/
+
+新对话开发先读 [动态项目库](docs/project-library/INDEX.md)，资料依据见 [SOURCES.md](SOURCES.md)。
 
 ## 本地运行
 

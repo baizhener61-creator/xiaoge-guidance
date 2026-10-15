@@ -1,88 +1,14 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#fff4f8">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="小格指引">
-  <meta name="description" content="给小格的温柔选择指引">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <title>小格的心愿指引</title>
-</head>
-<body>
-  <div class="sparkles" aria-hidden="true"></div>
-  <header class="topbar">
-    <button class="brand" type="button" data-view="home" aria-label="回到首页">
-      <span class="brand-mark">♡</span><span>小格的心愿指引</span>
-    </button>
-    <button class="icon-button" id="historyButton" type="button" aria-label="查看心愿足迹">☾</button>
-  </header>
-
-  <main>
-    <section class="view active" id="homeView">
-      <div class="hero-card">
-        <div class="mascot" aria-hidden="true"><span class="ear left"></span><span class="ear right"></span><span class="face">˶ᵔ ᵕ ᵔ˶</span><span class="bow">✿</span></div>
-        <p class="eyebrow">FOR XIAOGE · 私人心愿角落</p>
-        <h1>犹豫的时候，<br><span>陪你慢慢想清楚</span></h1>
-        <p class="hero-copy">把事情详细告诉我，我会从现实感受、塔罗意象与东方智慧三个角度，整理成一份温柔又能行动的指引。</p>
-        <button class="primary-button" id="startButton" type="button">开始一次心愿指引 <span>→</span></button>
-        <div class="privacy-pill">⌁ 内容只保存在这台手机</div>
-      </div>
-
-      <div class="daily-card">
-        <div><span class="mini-icon">☼</span><p class="eyebrow">今日小提醒</p><h2>先照顾感受，再追求完美</h2></div>
-        <p>为小格定制的私人角落<br>个人资料不会公开展示</p>
-      </div>
-
-      <div class="feature-grid" aria-label="指引方式">
-        <article><span>♡</span><strong>理性梳理</strong><small>看清在意与代价</small></article>
-        <article><span>✦</span><strong>塔罗意象</strong><small>听见内心的声音</small></article>
-        <article><span>☯</span><strong>东方启发</strong><small>找到当下的节奏</small></article>
-      </div>
-      <p class="disclaimer">结果用于娱乐与自我梳理，不替代医疗、法律、财务或安全方面的专业建议。</p>
-    </section>
-
-    <section class="view" id="formView" aria-labelledby="formTitle">
-      <div class="step-head">
-        <button class="back-button" type="button" data-view="home" aria-label="返回首页">←</button>
-        <div><p class="eyebrow">一次心愿指引</p><h1 id="formTitle">把犹豫交给我吧</h1></div>
-      </div>
-      <div class="progress"><span></span></div>
-      <form id="decisionForm" novalidate>
-        <label class="field"><span><b>01</b> 你正在犹豫什么？</span><textarea id="question" maxlength="120" rows="3" placeholder="例如：周末要去见朋友，还是留在家里休息？" required></textarea><small><i id="questionCount">0</i>/120</small><em class="error" id="questionError"></em></label>
-        <label class="field"><span><b>02</b> 事情的背景是什么？</span><textarea id="context" maxlength="500" rows="5" placeholder="发生了什么、有什么限制、为什么难选……写得越具体，指引越贴近你。" required></textarea><small><i id="contextCount">0</i>/500</small><em class="error" id="contextError"></em></label>
-        <label class="field"><span><b>03</b> 你现在有什么感受？</span><textarea id="feelings" maxlength="200" rows="3" placeholder="期待、担心、内疚、疲惫，或者说不上来都可以。"></textarea><small><i id="feelingsCount">0</i>/200</small></label>
-        <label class="field"><span><b>04</b> 这次最想守住什么？</span><input id="priorities" maxlength="80" placeholder="例如：舒服、关系、成长、时间"><small>可以写多个，用空格隔开</small></label>
-
-        <fieldset class="field options-field"><legend><b>05</b> 有哪些选择？</legend><div id="optionsList"></div><button class="text-button" id="addOptionButton" type="button">＋ 添加另一个选项</button><em class="error" id="optionsError"></em></fieldset>
-        <label class="consent"><input id="consent" type="checkbox" required><span>我知道这是一份自我梳理与娱乐指引，重要决定会再询问可信任的人。</span></label>
-        <button class="primary-button submit-button" type="submit">开启指引 <span>✦</span></button>
-      </form>
-    </section>
-
-    <section class="view" id="loadingView" aria-live="polite">
-      <div class="loading-orb"><span>✦</span><i></i><b></b></div>
-      <p class="eyebrow">正在整理你的心愿</p><h1>让答案慢慢浮现…</h1>
-      <p id="loadingText">先听听你真正重视的声音</p>
-    </section>
-
-    <section class="view" id="resultView" aria-labelledby="resultTitle">
-      <div class="step-head"><button class="back-button" type="button" data-view="home" aria-label="返回首页">×</button><div><p class="eyebrow">本次心愿指引</p><h1 id="resultTitle">答案已经来到</h1></div></div>
-      <div id="resultContent"></div>
-      <div class="result-actions"><button class="secondary-button" id="copyButton" type="button">复制指引</button><button class="primary-button" id="againButton" type="button">再想一件事</button></div>
-    </section>
-
-    <section class="view" id="historyView" aria-labelledby="historyTitle">
-      <div class="step-head"><button class="back-button" type="button" data-view="home" aria-label="返回首页">←</button><div><p class="eyebrow">只属于你的</p><h1 id="historyTitle">心愿足迹</h1></div></div>
-      <div id="historyList"></div><button class="danger-button" id="clearHistoryButton" type="button">清空全部记录</button>
-    </section>
-  </main>
-  <div class="toast" id="toast" role="status"></div>
-  <script type="module" src="src/app.js"></script>
-</body>
-</html>
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#fff3f7"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="小格指引"><meta name="description" content="小格的月光占卜小屋：四类心事，塔罗与易经，离线也有温柔指引。"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"><link rel="icon" href="assets/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><title>小格的月光占卜小屋</title></head>
+<body><div class="sky" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>·</i><i>✧</i></div><header class="topbar"><button class="brand" data-view="home" aria-label="回到小屋"><span>☾</span>小格的月光小屋</button><button class="icon-button" id="motionButton" aria-label="减少动画" aria-pressed="false">✧</button></header><main>
+<section id="homeView" class="view active" aria-labelledby="homeTitle"><div class="welcome"><p class="eyebrow">A LITTLE MAGIC, JUST FOR YOU</p><div class="moon-scene" aria-hidden="true"><span class="orbit"></span><span class="moon">☾</span><span class="star one">✦</span><span class="star two">✧</span><span class="crystal">◇</span><span class="cloud">☁</span></div><p class="greeting">小格，欢迎回来</p><h1 id="homeTitle" tabindex="-1">把犹豫留在门外，<br>来听一听<span>内心的回声</span></h1><p class="intro">点亮一盏心愿灯，让塔罗与易经陪你探索。<br>今夜，你想问哪一件事？</p></div><div id="sceneGrid" class="scene-grid"></div><div class="little-note"><span>✷</span><div><p class="eyebrow">月光寄语</p><p id="dailyNote">答案不必催促，先看清你想守护什么。</p></div></div><div class="home-links"><button data-view="library">♧ 牌与卦的藏书阁 <span>78 张牌 · 64 卦 →</span></button><button data-view="history">☾ 我的心愿手札 <span>只留在这台设备 →</span></button><button data-view="about">✧ 占卜方法与依据 <span>每一步都有迹可循 →</span></button></div><p class="footnote">古老象征，现代思考。指引用于反思与娱乐，选择权始终在你手中。</p></section>
+<section id="flowView" class="view" aria-labelledby="flowTitle"><div class="page-head"><button class="back-button" data-view="home" aria-label="回到小屋">←</button><div><p class="eyebrow" id="sceneSubtitle"></p><h1 id="flowTitle" tabindex="-1"></h1></div></div><div class="step-indicator" aria-label="填写进度"><span class="current">1 心事</span><i></i><span>2 线索</span><i></i><span>3 仪式</span></div><form id="decisionForm" novalidate>
+<div class="flow-step" id="storyStep"><div class="panel"><p class="eyebrow">不用组织语言，先点选就好</p><div id="quickStart"></div><div id="questionPreview" class="question-preview" aria-live="polite" hidden></div><details id="customStory"><summary>选项不够贴合？自己说，或补充细节</summary><label for="question">你想请教什么？</label><input id="question" maxlength="120" placeholder="也可以直接写下自己的问题" required><label for="context">补充事情经过与感受（选填）</label><textarea id="context" rows="5" maxlength="1200" placeholder="事情经过、你的感受、担心和期待，都可以写下来。"></textarea><p class="helper">文字会记在手札中。下一步的小问题会帮助我们匹配具体建议。</p><label for="options">已有选项或其他情况（选填）</label><textarea id="options" rows="2" maxlength="300" placeholder="可以补充尚未包含的候选与条件。"></textarea></details></div><button class="primary-button" id="toQuestions" type="button">收集心愿线索 →</button></div>
+<div class="flow-step" id="questionsStep" hidden><div class="oracle-voice"><span>☾</span><p>小占卜师想再听你说几句。<br>这些线索会影响现实建议，牌与卦则独立抽取。</p></div><div id="questionsList"></div><div class="paired-buttons"><button class="secondary-button" id="backStory" type="button">上一步</button><button class="primary-button" id="toMethod" type="button">点亮心愿灯 →</button></div></div>
+<div class="flow-step" id="methodStep" hidden><div class="panel"><p class="eyebrow">选择今夜的仪式</p><h2>让哪一种智慧陪你？</h2><label class="method-option"><input type="radio" name="method" value="tarot" checked><span class="method-symbol">✦</span><span><strong>月光塔罗</strong><small>洗牌后亲选三张 · 现状 / 阻碍 / 建议</small></span></label><label class="method-option"><input type="radio" name="method" value="iching"><span class="method-symbol">☯</span><span><strong>六掷问易</strong><small>三枚钱币 · 六次成卦 · 本卦与变卦</small></span></label><p class="helper">不需要追求“好结果”。同一件事建议先记下感受，再决定是否重问。</p></div><div class="paired-buttons"><button class="secondary-button" id="backQuestions" type="button">上一步</button><button class="primary-button" type="submit">走进仪式 ✦</button></div></div><p id="formError" class="error" role="alert"></p></form></section>
+<section id="ritualView" class="view" aria-labelledby="ritualTitle"><div class="page-head"><button class="back-button" id="leaveRitual" aria-label="返回填写">←</button><div><p class="eyebrow">一事一问 · 静心片刻</p><h1 id="ritualTitle" tabindex="-1"></h1></div></div><p id="ritualQuestion" class="ritual-question"></p><div id="ritualStage"></div></section>
+<section id="resultView" class="view" aria-labelledby="resultTitle"><div class="page-head"><button class="back-button" data-view="home" aria-label="回到小屋">←</button><div><p class="eyebrow">写给你的月光来信</p><h1 id="resultTitle" tabindex="-1">让指引慢慢展开</h1></div></div><div id="resultContent"></div><div class="paired-buttons"><button class="secondary-button" id="copyButton">复制这封信</button><button class="primary-button" data-view="home">回到小屋 ☾</button></div></section>
+<section id="libraryView" class="view" aria-labelledby="libraryTitle"><div class="page-head"><button class="back-button" data-view="home" aria-label="回到小屋">←</button><div><p class="eyebrow">把每个象征读明白</p><h1 id="libraryTitle" tabindex="-1">月光藏书阁</h1></div></div><div class="tabs"><button id="tarotTab" aria-pressed="true">塔罗 78</button><button id="ichingTab" aria-pressed="false">易经 64</button></div><label class="search-label" for="librarySearch">寻找一张牌或一卦</label><input type="search" id="librarySearch" placeholder="输入名字，例如：星星、乾、渐"><div id="libraryList"></div></section>
+<section id="historyView" class="view" aria-labelledby="historyTitle"><div class="page-head"><button class="back-button" data-view="home" aria-label="回到小屋">←</button><div><p class="eyebrow">每一次认真选择，都值得记住</p><h1 id="historyTitle" tabindex="-1">心愿手札</h1></div></div><div id="historyList"></div><button class="text-button danger" id="clearHistoryButton">清空全部手札</button></section>
+<section id="aboutView" class="view" aria-labelledby="aboutTitle"><div class="page-head"><button class="back-button" data-view="home" aria-label="回到小屋">←</button><div><p class="eyebrow">方法、原文与边界</p><h1 id="aboutTitle" tabindex="-1">占卜的来处</h1></div></div><article class="panel prose"><h2>塔罗怎样抽取？</h2><p>完整 78 张 Rider–Waite–Smith 体系牌组，使用浏览器安全随机源和无偏抽样进行 Fisher–Yates 洗牌。每张牌正逆位各半，单次三牌不重复，跨次允许重复。选牌后结果固定，动画不改牌。</p><p>本应用采用“现状—阻碍—建议”现代三牌阵，不冒称 Waite 原书牌阵。中文牌义为根据 RWS 象征传统整理的现代解读，不是原书逐字翻译；逆位按阻滞、内化或过量理解，并非简单吉凶。</p><a href="https://sacred-texts.com/tarot/pkt/index.htm" target="_blank" rel="noopener">A. E. Waite《The Pictorial Key to the Tarot》(1911) ↗</a><h2>易经怎样排卦？</h2><p>三枚钱币：正面 3，背面 2，每次相加得到 6/7/8/9，概率依次 1/8、3/8、3/8、1/8。6 老阴、7 少阳、8 少阴、9 老阳。六掷从下向上成卦；6 和 9 为动爻，阴阳反转得变卦。此法不是蓍草法，两者概率不同。</p><p>保留六掷记录，展示本卦卦辞、全部动爻、变卦卦辞；乾坤六爻全动时也展示用九或用六。本应用采用以上“并读方式”，不声称它是唯一传统断法，也不套用未经核验的多动爻取辞表。</p><a href="https://zhouyi.dk/the-coin-method" target="_blank" rel="noopener">核对三枚钱币法 ↗</a><h2>原文与现代解释</h2><p>64 卦、384 条爻辞与象辞为古经数字录本；现代提示为本应用原创整理，并非逐爻翻译。原文使用繁体，异体字、标点和传本可能有差异。数据来源与校勘说明见仓库 SOURCES.md。图鉴可离线阅读。</p><a href="https://ctext.org/book-of-changes/zh" target="_blank" rel="noopener">中国哲学书电子化计划《周易》 ↗</a><h2>现实建议来自哪里？</h2><p>四类场景的结构化回答触发对应规则，不使用文字哈希评分。自由文字保存为你的自述，离线程序不宣称理解所有语意。相同条件的建议可以相同；餐食只在同等匹配候选中轮换，不影响牌卦概率。</p><h2>隐私与选择</h2><p>心事与手札只在当前设备保存，不上传、不调用 AI。清理网站数据会删除记录。象征解读用于反思，不保证预测事实；健康、财务、法律和安全事项请依靠现实信息与专业支持。</p></article></section>
+</main><nav class="bottom-nav" aria-label="主要导航"><button data-view="home">☾<span>小屋</span></button><button data-view="library">♧<span>藏书阁</span></button><button data-view="history">✧<span>手札</span></button></nav><div id="toast" class="toast" role="status"></div><script type="module" src="src/app.js"></script></body></html>
