@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff4f8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="小格指引">
+  <meta name="description" content="给小格的温柔选择指引">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>小格的心愿指引</title>
+</head>
+<body>
+  <div class="sparkles" aria-hidden="true"></div>
+  <header class="topbar">
+    <button class="brand" type="button" data-view="home" aria-label="回到首页">
+      <span class="brand-mark">♡</span><span>小格的心愿指引</span>
+    </button>
+    <button class="icon-button" id="historyButton" type="button" aria-label="查看心愿足迹">☾</button>
+  </header>
+
+  <main>
+    <section class="view active" id="homeView">
+      <div class="hero-card">
+        <div class="mascot" aria-hidden="true"><span class="ear left"></span><span class="ear right"></span><span class="face">˶ᵔ ᵕ ᵔ˶</span><span class="bow">✿</span></div>
+        <p class="eyebrow">FOR XIAOGE · 私人心愿角落</p>
+        <h1>犹豫的时候，<br><span>陪你慢慢想清楚</span></h1>
+        <p class="hero-copy">把事情详细告诉我，我会从现实感受、塔罗意象与东方智慧三个角度，整理成一份温柔又能行动的指引。</p>
+        <button class="primary-button" id="startButton" type="button">开始一次心愿指引 <span>→</span></button>
+        <div class="privacy-pill">⌁ 内容只保存在这台手机</div>
+      </div>
+
+      <div class="daily-card">
+        <div><span class="mini-icon">☼</span><p class="eyebrow">今日小提醒</p><h2>先照顾感受，再追求完美</h2></div>
+        <p>为小格定制的私人角落<br>个人资料不会公开展示</p>
+      </div>
+
+      <div class="feature-grid" aria-label="指引方式">
+        <article><span>♡</span><strong>理性梳理</strong><small>看清在意与代价</small></article>
+        <article><span>✦</span><strong>塔罗意象</strong><small>听见内心的声音</small></article>
+        <article><span>☯</span><strong>东方启发</strong><small>找到当下的节奏</small></article>
+      </div>
+      <p class="disclaimer">结果用于娱乐与自我梳理，不替代医疗、法律、财务或安全方面的专业建议。</p>
+    </section>
+
+    <section class="view" id="formView" aria-labelledby="formTitle">
+      <div class="step-head">
+        <button class="back-button" type="button" data-view="home" aria-label="返回首页">←</button>
+        <div><p class="eyebrow">一次心愿指引</p><h1 id="formTitle">把犹豫交给我吧</h1></div>
+      </div>
+      <div class="progress"><span></span></div>
+      <form id="decisionForm" novalidate>
+        <label class="field"><span><b>01</b> 你正在犹豫什么？</span><textarea id="question" maxlength="120" rows="3" placeholder="例如：周末要去见朋友，还是留在家里休息？" required></textarea><small><i id="questionCount">0</i>/120</small><em class="error" id="questionError"></em></label>
+        <label class="field"><span><b>02</b> 事情的背景是什么？</span><textarea id="context" maxlength="500" rows="5" placeholder="发生了什么、有什么限制、为什么难选……写得越具体，指引越贴近你。" required></textarea><small><i id="contextCount">0</i>/500</small><em class="error" id="contextError"></em></label>
+        <label class="field"><span><b>03</b> 你现在有什么感受？</span><textarea id="feelings" maxlength="200" rows="3" placeholder="期待、担心、内疚、疲惫，或者说不上来都可以。"></textarea><small><i id="feelingsCount">0</i>/200</small></label>
+        <label class="field"><span><b>04</b> 这次最想守住什么？</span><input id="priorities" maxlength="80" placeholder="例如：舒服、关系、成长、时间"><small>可以写多个，用空格隔开</small></label>
+
+        <fieldset class="field options-field"><legend><b>05</b> 有哪些选择？</legend><div id="optionsList"></div><button class="text-button" id="addOptionButton" type="button">＋ 添加另一个选项</button><em class="error" id="optionsError"></em></fieldset>
+        <label class="consent"><input id="consent" type="checkbox" required><span>我知道这是一份自我梳理与娱乐指引，重要决定会再询问可信任的人。</span></label>
+        <button class="primary-button submit-button" type="submit">开启指引 <span>✦</span></button>
+      </form>
+    </section>
+
+    <section class="view" id="loadingView" aria-live="polite">
+      <div class="loading-orb"><span>✦</span><i></i><b></b></div>
+      <p class="eyebrow">正在整理你的心愿</p><h1>让答案慢慢浮现…</h1>
+      <p id="loadingText">先听听你真正重视的声音</p>
+    </section>
+
+    <section class="view" id="resultView" aria-labelledby="resultTitle">
+      <div class="step-head"><button class="back-button" type="button" data-view="home" aria-label="返回首页">×</button><div><p class="eyebrow">本次心愿指引</p><h1 id="resultTitle">答案已经来到</h1></div></div>
+      <div id="resultContent"></div>
+      <div class="result-actions"><button class="secondary-button" id="copyButton" type="button">复制指引</button><button class="primary-button" id="againButton" type="button">再想一件事</button></div>
+    </section>
+
+    <section class="view" id="historyView" aria-labelledby="historyTitle">
+      <div class="step-head"><button class="back-button" type="button" data-view="home" aria-label="返回首页">←</button><div><p class="eyebrow">只属于你的</p><h1 id="historyTitle">心愿足迹</h1></div></div>
+      <div id="historyList"></div><button class="danger-button" id="clearHistoryButton" type="button">清空全部记录</button>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
