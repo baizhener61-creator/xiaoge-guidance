@@ -4,6 +4,10 @@
 
 `xiaoge-guide-web.zip` 是可以直接上传到静态网站托管平台的成品包。发布后请确认首页地址以 `https://` 开头。
 
+当前正式网站：https://baizhener61-creator.github.io/xiaoge-guidance/
+
+v2 月光小屋已发布；代码推送到 main 后由 GitHub Actions 自动部署。开发接续见 `docs/project-library/INDEX.md`。
+
 发布包内只包含运行需要的文件：
 
 - `index.html`
